@@ -3,7 +3,7 @@ int motorForward = 5, motorReverse = 6, swState = 7;
 
 void setup() {
 
-  Serial.begin(9600);
+  // Serial.begin(9600);
   pinMode(motorForward, OUTPUT);
   pinMode(motorReverse, OUTPUT);
   pinMode(swState, INPUT);
@@ -18,9 +18,9 @@ void loop() {
   int mSensorRead = map(sensorRead, 0, 1023, 0, 100);
   currentLimit = double(mPotRead)/100;
   currentRead = double(mSensorRead)/100;
-  Serial.println("CurrentLimit is:"+ String(currentLimit));
-  Serial.println("CurrentRead is:"+ String(currentRead));
-  Serial.println();
+  // Serial.println("CurrentLimit is:"+ String(currentLimit));
+  // Serial.println("CurrentRead is:"+ String(currentRead));
+  // Serial.println();
   delay(500);
 
   if((swStateRead == true) && (currentRead <= currentLimit)){

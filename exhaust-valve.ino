@@ -1,9 +1,10 @@
 double currentRead, currentLimit;
-int motorForward = 5, motorReverse = 6, swState = 7;
+int motorForward = 5, motorReverse = 6, swState = 7, potRead;
 
 void setup() {
 
   // Serial.begin(9600);
+  pinMode(potRead, INPUT);
   pinMode(motorForward, OUTPUT);
   pinMode(motorReverse, OUTPUT);
   pinMode(swState, INPUT);
@@ -11,7 +12,7 @@ void setup() {
 
 void loop() {
 
-  int potRead = analogRead(A0);
+  potRead = analogRead(A0);
   int sensorRead = analogRead(A1);
   bool swStateRead = digitalRead(swState);
   int mPotRead = map(potRead, 0, 1023, 0, 100);

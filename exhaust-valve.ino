@@ -3,7 +3,7 @@ int motorForward = 5, motorReverse = 6, swState = 7, potRead, sensorRead;
 
 void setup() {
 
-  Serial.begin(9600);
+  // Serial.begin(9600);
   pinMode(potRead, INPUT);
   pinMode(motorForward, OUTPUT);
   pinMode(motorReverse, OUTPUT);
@@ -24,15 +24,15 @@ void loop() {
   fCurrent = currentRead+offsetFor;
   rCurrent = currentRead+offsetRe;
 
-  Serial.print(offsetFor);
-  Serial.print(",");
-  Serial.println(offsetRe);
+  // Serial.print(offsetFor);
+  // Serial.print(",");
+  // Serial.println(offsetRe);
   
-  Serial.print("CurrentLimit is:");
-  Serial.println(currentLimit, 4);
+  // Serial.print("CurrentLimit is:");
+  // Serial.println(currentLimit, 4);
 
-  Serial.print("CurrentRead is:");
-  Serial.println(currentRead, 4);
+  // Serial.print("CurrentRead is:");
+  // Serial.println(currentRead, 4);
 
   // Serial.println();
   delay(500);

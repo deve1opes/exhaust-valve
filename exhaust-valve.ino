@@ -28,8 +28,12 @@ void loop() {
   Serial.print(",");
   Serial.println(offsetRe);
   
-  Serial.println("CurrentLimit is:"+ String(currentLimit));
-  Serial.println("CurrentRead is:"+ String(currentRead));
+  Serial.print("CurrentLimit is:");
+  Serial.println(currentLimit, 4);
+
+  Serial.print("CurrentRead is:");
+  Serial.println(currentRead, 4);
+
   // Serial.println();
   delay(500);
 

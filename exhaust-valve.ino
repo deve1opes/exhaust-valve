@@ -1,9 +1,9 @@
-double currentRead, currentLimit;
-int motorForward = 5, motorReverse = 6, swState = 7, potRead;
+double currentRead, currentLimit, offsetFor = 0.0, offsetRe = 0.0, fCurrent, rCurrent;
+int motorForward = 5, motorReverse = 6, swState = 7, potRead, sensorRead;
 
 void setup() {
 
-  // Serial.begin(9600);
+  Serial.begin(9600);
   pinMode(potRead, INPUT);
   pinMode(motorForward, OUTPUT);
   pinMode(motorReverse, OUTPUT);
@@ -13,24 +13,33 @@ void setup() {
 void loop() {
 
   potRead = analogRead(A0);
-  int sensorRead = analogRead(A1);
+  sensorRead = analogRead(A1);
   bool swStateRead = digitalRead(swState);
   int mPotRead = map(potRead, 0, 1023, 0, 100);
   int mSensorRead = map(sensorRead, 0, 1023, 0, 100);
   currentLimit = double(mPotRead)/100;
   currentRead = double(mSensorRead)/100;
-  // Serial.println("CurrentLimit is:"+ String(currentLimit));
-  // Serial.println("CurrentRead is:"+ String(currentRead));
+
+  // Forward+offset, Reverse+offset
+  fCurrent = currentRead+offsetFor;
+  rCurrent = currentRead+offsetRe;
+
+  Serial.print(offsetFor);
+  Serial.print(",");
+  Serial.println(offsetRe);
+  
+  Serial.println("CurrentLimit is:"+ String(currentLimit));
+  Serial.println("CurrentRead is:"+ String(currentRead));
   // Serial.println();
   delay(500);
 
-  if((swStateRead == true) && (currentRead <= currentLimit)){
+  if((swStateRead == true) && (fCurrent <= currentLimit)){
     //Open exhaust valve
     digitalWrite(motorReverse, LOW);
     delay(10);
     digitalWrite(motorForward, HIGH);
 
-  }else if ((swStateRead == false) && (currentRead <= currentLimit)){
+  }else if ((swStateRead == false) && (rCurrent <= currentLimit)){
     //Close exhaust valve
     digitalWrite(motorForward, LOW);
     delay(10);
